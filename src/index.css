@@ -1,68 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap");
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --font-dm-sans: "DM Sans", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-geist-mono: monospace; /* Fallback for now */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /* Updated color tokens for black and gold therapist theme */
+  --background: oklch(1 0 0); /* White background */
+  --foreground: oklch(0 0 0); /* Black text */
+  --card: oklch(0.97 0 0); /* Light gray card backgrounds */
+  --card-foreground: oklch(0 0 0); /* Black text on cards */
+  --popover: oklch(1 0 0); /* White popover background */
+  --popover-foreground: oklch(0 0 0); /* Black popover text */
+  --primary: oklch(0 0 0); /* Black primary color */
+  --primary-foreground: oklch(1 0 0); /* White text on primary */
+  --secondary: oklch(0.85 0.15 85); /* Gold accent color */
+  --secondary-foreground: oklch(0 0 0); /* Black text on gold */
+  --muted: oklch(0.75 0 0); /* Medium gray for muted text */
+  --muted-foreground: oklch(0 0 0); /* Black text for muted elements */
+  --accent: oklch(0.85 0.15 85); /* Gold accent */
+  --accent-foreground: oklch(0 0 0); /* Black text on accent */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.75 0 0); /* Medium gray borders */
+  --input: oklch(0.97 0 0); /* Light gray input backgrounds */
+  --ring: oklch(0.85 0.15 85); /* Gold focus ring */
+  --chart-1: oklch(0.85 0.15 85); /* Gold */
+  --chart-2: oklch(0.75 0 0); /* Medium gray */
+  --chart-3: oklch(0.97 0 0); /* Light gray */
+  --chart-4: oklch(0 0 0); /* Black */
+  --chart-5: oklch(0.85 0.15 85); /* Gold */
+  --radius: 0.5rem;
+  --sidebar: oklch(0.97 0 0); /* Light gray sidebar */
+  --sidebar-foreground: oklch(0 0 0); /* Black sidebar text */
+  --sidebar-primary: oklch(0.85 0.15 85); /* Gold sidebar primary */
+  --sidebar-primary-foreground: oklch(0 0 0); /* Black text on gold */
+  --sidebar-accent: oklch(0.85 0.15 85); /* Gold sidebar accent */
+  --sidebar-accent-foreground: oklch(0 0 0); /* Black text on accent */
+  --sidebar-border: oklch(0.75 0 0); /* Medium gray sidebar border */
+  --sidebar-ring: oklch(0.85 0.15 85); /* Gold sidebar focus ring */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.dark {
+  /* Updated dark mode tokens to maintain black and gold theme */
+  --background: oklch(0.1 0 0); /* Very dark background */
+  --foreground: oklch(1 0 0); /* White text */
+  --card: oklch(0.15 0 0); /* Dark card backgrounds */
+  --card-foreground: oklch(1 0 0); /* White text on cards */
+  --popover: oklch(0.1 0 0); /* Dark popover background */
+  --popover-foreground: oklch(1 0 0); /* White popover text */
+  --primary: oklch(1 0 0); /* White primary in dark mode */
+  --primary-foreground: oklch(0 0 0); /* Black text on white */
+  --secondary: oklch(0.85 0.15 85); /* Gold remains the same */
+  --secondary-foreground: oklch(0 0 0); /* Black text on gold */
+  --muted: oklch(0.4 0 0); /* Lighter gray for dark mode */
+  --muted-foreground: oklch(0.8 0 0); /* Light gray text */
+  --accent: oklch(0.85 0.15 85); /* Gold accent */
+  --accent-foreground: oklch(0 0 0); /* Black text on accent */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.3 0 0); /* Dark gray borders */
+  --input: oklch(0.15 0 0); /* Dark input backgrounds */
+  --ring: oklch(0.85 0.15 85); /* Gold focus ring */
+  --chart-1: oklch(0.85 0.15 85);
+  --chart-2: oklch(0.4 0 0);
+  --chart-3: oklch(0.15 0 0);
+  --chart-4: oklch(1 0 0);
+  --chart-5: oklch(0.85 0.15 85);
+  --sidebar: oklch(0.1 0 0);
+  --sidebar-foreground: oklch(1 0 0);
+  --sidebar-primary: oklch(0.85 0.15 85);
+  --sidebar-primary-foreground: oklch(0 0 0);
+  --sidebar-accent: oklch(0.85 0.15 85);
+  --sidebar-accent-foreground: oklch(0 0 0);
+  --sidebar-border: oklch(0.3 0 0);
+  --sidebar-ring: oklch(0.85 0.15 85);
+}
+
+@theme inline {
+  /* Updated font variables for Space Grotesk and DM Sans */
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-space-grotesk);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-  a:hover {
-    color: #747bff;
+  body {
+    @apply bg-background text-foreground;
   }
-  button {
-    background-color: #f9f9f9;
+
+  /* Added responsive typography using CSS clamp() */
+  h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
   }
 }
