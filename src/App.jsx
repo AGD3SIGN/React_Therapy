@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import Navigation from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,57 +26,103 @@ import {
   Mail,
   MapPin,
   Send,
+  Eye
 } from "lucide-react";
 import { RotatingText } from "@/components/rotating-text";
+import ResourceView from "@/components/resource-view";
+import ProductView from "@/components/product-view";
+import heroImage from "@/assets/hero-image.jpg";
+
 
 export default function HomePage() {
+  const [selectedResource, setSelectedResource] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
 
+      <AnimatePresence>
+        {selectedResource && (
+          <ResourceView resource={selectedResource} onClose={() => setSelectedResource(null)} />
+        )}
+        {selectedProduct && (
+          <ProductView product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+        )}
+      </AnimatePresence>
+
       {/* Hero Section */}
       <section
         id="home"
-        className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20"
+        className="relative min-h-[100vh] w-full flex items-center overflow-hidden pt-20"
       >
-        <div className="absolute inset-0 bg-background">
-          {/* Animated gradient blobs */}
-          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-orange-100/40 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute top-[20%] right-[-10%] w-[60%] h-[60%] bg-amber-100/30 rounded-full blur-[100px] animate-pulse delay-1000" />
-          <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] bg-rose-50/50 rounded-full blur-[80px] animate-pulse delay-700" />
-
-          {/* Subtle noise texture overlay */}
-          <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-        </div>
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="font-heading text-balance mb-6 sm:mb-8 text-foreground text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight">
-              A Space Created for <br />
-              You to Be
-              <RotatingText
-                words={["Respected", "Understood", "Supported"]}
-                className="inline-block"
-              />
-            </h1>
-            <p className="text-pretty text-muted-foreground mb-8 sm:mb-10 max-w-2xl mx-auto px-4 sm:px-0 text-lg sm:text-xl">
-              Professional therapy services in a welcoming, trustworthy
-              environment where you can feel comfortable to open up and speak
-              freely. Your journey to wellness starts here.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
-              <Button
-                size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 font-medium h-12 px-8 text-base touch-manipulation"
-              >
-                Book a Session
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent h-12 px-8 text-base touch-manipulation"
-              >
-                Learn More
-              </Button>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <h1 className="font-heading text-balance mb-6 sm:mb-8 text-foreground text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight">
+                A Space Created for <br />
+                You to Be{" "}
+                <RotatingText
+                  words={["Respected", "Understood", "Supported"]}
+                  className="inline-block text-left"
+                />
+              </h1>
+              <p className="text-pretty text-muted-foreground mb-8 sm:mb-10 max-w-lg mx-auto lg:mx-0 text-lg sm:text-xl">
+                Professional therapy services in a welcoming, trustworthy
+                environment where you can feel comfortable to open up and speak
+                freely. Your journey to wellness starts here.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button
+                  size="lg"
+                  className="bg-accent text-accent-foreground hover:bg-accent/90 font-medium h-12 px-8 text-base touch-manipulation"
+                >
+                  Book a Session
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent h-12 px-8 text-base touch-manipulation"
+                >
+                  Learn More
+                </Button>
+              </div>
+            </div>
+            <div className="relative lg:h-full flex items-center justify-center lg:justify-end">
+              <div className="relative w-full max-w-lg lg:max-w-none aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-border/50">
+                <img
+                  src={heroImage}
+                  alt="Therapy session environment"
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Floating Badge - Trusted */}
+                <div className="absolute top-6 left-6 bg-background/80 backdrop-blur-md border border-border/50 p-4 rounded-xl shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                      <Shield className="h-5 w-5 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Trusted & Secure</p>
+                      <p className="text-xs text-muted-foreground">100% Confidential</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Badge - Satisfaction */}
+                <div className="absolute bottom-6 right-6 bg-background/80 backdrop-blur-md border border-border/50 p-4 rounded-xl shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-accent/20 flex items-center justify-center">
+                      <Star className="h-5 w-5 text-accent" fill="currentColor" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">5.0 Star Rating</p>
+                      <p className="text-xs text-muted-foreground">From our clients</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
@@ -423,7 +471,7 @@ export default function HomePage() {
             ].map((post, index) => (
               <Card
                 key={index}
-                className="border-border hover:border-accent transition-all duration-300 hover:shadow-lg group overflow-hidden h-full"
+                className="border-border hover:border-accent transition-all duration-300 hover:shadow-lg group h-full flex flex-col"
               >
                 <div className="aspect-video overflow-hidden">
                   <img
@@ -432,7 +480,7 @@ export default function HomePage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <CardContent className="p-4 sm:p-6 flex flex-col h-full">
+                <CardContent className="p-4 sm:p-6 flex flex-col flex-1">
                   <div className="flex items-center gap-2 mb-3 flex-wrap">
                     <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full whitespace-nowrap">
                       {post.category}
@@ -456,9 +504,10 @@ export default function HomePage() {
                       <span>{post.readTime}</span>
                     </span>
                     <Button
-                      variant="ghost"
+                      variant="outline"
                       size="sm"
-                      className="text-accent hover:text-accent-foreground hover:bg-accent p-0 h-auto font-medium group/btn min-h-[44px] touch-manipulation"
+                      className="border-accent text-accent hover:bg-accent hover:text-accent-foreground h-auto font-medium group/btn min-h-[40px] touch-manipulation px-4"
+                      onClick={() => setSelectedResource(post)}
                     >
                       Read More
                       <ArrowRight className="w-3 h-3 ml-1 group-hover/btn:translate-x-1 transition-transform" />
@@ -587,7 +636,7 @@ export default function HomePage() {
             ].map((product, index) => (
               <Card
                 key={index}
-                className="border-border hover:border-accent transition-all duration-300 hover:shadow-lg group overflow-hidden h-full"
+                className="border-border hover:border-accent transition-all duration-300 hover:shadow-lg group h-full flex flex-col"
               >
                 <div className="relative aspect-square overflow-hidden">
                   <img
@@ -601,7 +650,7 @@ export default function HomePage() {
                     </div>
                   )}
                 </div>
-                <CardContent className="p-3 sm:p-4 flex flex-col h-full">
+                <CardContent className="p-3 sm:p-4 flex flex-col flex-1">
                   <h3 className="font-heading text-card-foreground mb-2 group-hover:text-accent transition-colors leading-tight">
                     {product.name}
                   </h3>
@@ -640,13 +689,24 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <Button
-                    size="sm"
-                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90 group/btn min-h-[44px] touch-manipulation"
-                  >
-                    <ShoppingCart className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform" />
-                    Add to Cart
-                  </Button>
+                  <div className="flex gap-3 pt-3 mt-auto">
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      className="flex-1 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground group/view min-h-[44px] touch-manipulation"
+                      onClick={() => setSelectedProduct(product)}
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      View
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90 group/btn min-h-[44px] touch-manipulation"
+                    >
+                      <ShoppingCart className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform" />
+                      Add
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -780,176 +840,196 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-            {/* Contact Information */}
-            <div className="space-y-6 sm:space-y-8">
-              <div>
-                <h3 className="font-heading text-card-foreground mb-4 sm:mb-6">
-                  Contact Information
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-5 h-5 text-accent" />
+          <div className="flex flex-col gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+              {/* Contact Information */}
+              <div className="space-y-6 sm:space-y-8">
+                <div>
+                  <h3 className="font-heading text-card-foreground mb-4 sm:mb-6">
+                    Contact Information
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Phone className="w-5 h-5 text-accent" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-medium text-card-foreground">Phone</p>
+                        <p className="text-muted-foreground break-all">
+                          (555) 123-4567
+                        </p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="font-medium text-card-foreground">Phone</p>
-                      <p className="text-muted-foreground break-all">
-                        (555) 123-4567
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-accent" />
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Mail className="w-5 h-5 text-accent" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-medium text-card-foreground">Email</p>
+                        <p className="text-muted-foreground break-all">
+                          hello@safespacetherapy.com
+                        </p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="font-medium text-card-foreground">Email</p>
-                      <p className="text-muted-foreground break-all">
-                        hello@safespacetherapy.com
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-accent" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-medium text-card-foreground">
-                        Location
-                      </p>
-                      <p className="text-muted-foreground">
-                        123 Healing Way, Suite 101<br />
-                        Wellness City, WC 12345
-                      </p>
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-5 h-5 text-accent" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-medium text-card-foreground">
+                          Location
+                        </p>
+                        <p className="text-muted-foreground">
+                          123 Healing Way, Suite 101<br />
+                          Wellness City, WC 12345
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div>
-                <h3 className="font-heading text-card-foreground mb-4 sm:mb-6">
-                  Office Hours
-                </h3>
-                <div className="space-y-2 text-muted-foreground">
-                  <div className="flex justify-between">
-                    <span>Monday - Friday</span>
-                    <span>9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Saturday</span>
-                    <span>10:00 AM - 2:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday</span>
-                    <span>Closed</span>
+                <div>
+                  <h3 className="font-heading text-card-foreground mb-4 sm:mb-6">
+                    Office Hours
+                  </h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <div className="flex justify-between">
+                      <span>Monday - Friday</span>
+                      <span>9:00 AM - 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Saturday</span>
+                      <span>10:00 AM - 2:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Sunday</span>
+                      <span>Closed</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Crisis Support Card */}
-              <div className="rounded-xl border border-orange-200 bg-orange-50 p-6">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
-                    <Heart className="w-5 h-5 text-orange-600" />
+                {/* Crisis Support Card */}
+                <div className="rounded-xl border border-orange-200 bg-orange-50 p-6">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
+                      <Heart className="w-5 h-5 text-orange-600" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-heading font-semibold text-orange-900 mb-1">
+                        Crisis Support Available 24/7
+                      </h4>
+                      <p className="text-orange-800/80 text-sm">
+                        If you're in crisis, you're not alone. Immediate help is available.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-lg font-heading font-semibold text-orange-900 mb-1">
-                      Crisis Support Available 24/7
-                    </h4>
-                    <p className="text-orange-800/80 text-sm">
-                      If you're in crisis, you're not alone. Immediate help is available.
+
+                  <div className="grid grid-cols-3 gap-4 text-center mb-6">
+                    <div>
+                      <p className="text-2xl font-bold text-orange-600 mb-1">988</p>
+                      <p className="text-xs font-medium text-orange-900">Crisis Lifeline</p>
+                    </div>
+                    <div>
+                      <p className="text-lg font-bold text-orange-600 mb-1">HOME to 741741</p>
+                      <p className="text-xs font-medium text-orange-900">Crisis Text Line</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-orange-600 mb-1">911</p>
+                      <p className="text-xs font-medium text-orange-900">Emergency Services</p>
+                    </div>
+                  </div>
+
+                  <div className="text-center border-t border-orange-200/60 pt-4">
+                    <p className="text-xs text-orange-800/70">
+                      Additional support: NAMI (800) 950-6264 • SAMHSA (800) 662-4357
                     </p>
                   </div>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-3 gap-4 text-center mb-6">
-                  <div>
-                    <p className="text-2xl font-bold text-orange-600 mb-1">988</p>
-                    <p className="text-xs font-medium text-orange-900">Crisis Lifeline</p>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-orange-600 mb-1">HOME to 741741</p>
-                    <p className="text-xs font-medium text-orange-900">Crisis Text Line</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-orange-600 mb-1">911</p>
-                    <p className="text-xs font-medium text-orange-900">Emergency Services</p>
-                  </div>
-                </div>
+              <div className="space-y-6 sm:space-y-8">
+                {/* Contact Form */}
+                <Card className="border-border h-full">
+                  <CardContent className="p-4 sm:p-6">
+                    <form className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="first-name">First Name</Label>
+                          <Input
+                            id="first-name"
+                            placeholder="Enter your first name"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="last-name">Last Name</Label>
+                          <Input
+                            id="last-name"
+                            placeholder="Enter your last name"
+                          />
+                        </div>
+                      </div>
 
-                <div className="text-center border-t border-orange-200/60 pt-4">
-                  <p className="text-xs text-orange-800/70">
-                    Additional support: NAMI (800) 950-6264 • SAMHSA (800) 662-4357
-                  </p>
-                </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="Enter your email"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone (Optional)</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          placeholder="Enter your phone number"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="subject">Subject</Label>
+                        <Input id="subject" placeholder="How can we help?" />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Message</Label>
+                        <Textarea
+                          id="message"
+                          placeholder="Tell us a bit about what you're looking for..."
+                          className="min-h-[120px]"
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-accent text-accent-foreground hover:bg-accent/90 min-h-[44px] touch-manipulation"
+                      >
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Message
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
               </div>
             </div>
 
-            {/* Contact Form */}
-            <Card className="border-border">
-              <CardContent className="p-4 sm:p-6">
-                <form className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="first-name">First Name</Label>
-                      <Input
-                        id="first-name"
-                        placeholder="Enter your first name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="last-name">Last Name</Label>
-                      <Input
-                        id="last-name"
-                        placeholder="Enter your last name"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone (Optional)</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="Enter your phone number"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="How can we help?" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us a bit about what you're looking for..."
-                      className="min-h-[120px]"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90 min-h-[44px] touch-manipulation"
-                  >
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
+            {/* Map Embed - Full Width Bottom */}
+            <Card className="border-border overflow-hidden w-full">
+              <div className="aspect-[21/9] w-full bg-muted/20">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11568.02645885231!2d-74.00898595!3d40.7107779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1677610488950!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Office Location"
+                />
+              </div>
             </Card>
           </div>
         </div>
