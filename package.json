@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "homepage": "https://agd3sign.github.io/React_Therapy",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

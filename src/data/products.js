@@ -1,0 +1,98 @@
+export const productsData = [
+  {
+    category: "Journals",
+    name: "Mindfulness Journal",
+    description:
+      "A beautifully designed journal with guided prompts for daily reflection and mindfulness practice.",
+    price: "$24.99",
+    originalPrice: "$29.99",
+    rating: 4.8,
+    reviews: 127,
+    image: "elegant-mindfulness-journal-with-gold-accents.jpg",
+    badge: "Bestseller",
+  },
+  {
+    category: "Workbooks",
+    name: "Anxiety Relief Workbook",
+    description:
+      "Evidence-based worksheets and exercises to help manage anxiety and develop coping strategies.",
+    price: "$19.99",
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 89,
+    image: "professional-anxiety-workbook-therapy-resource.jpg",
+    badge: null,
+  },
+  {
+    category: "Tools",
+    name: "Gratitude Practice Cards",
+    description:
+      "52 beautifully illustrated cards with gratitude prompts to cultivate positivity and appreciation.",
+    price: "$16.99",
+    originalPrice: "$21.99",
+    rating: 4.7,
+    reviews: 203,
+    image: "elegant-gratitude-cards-with-gold-details.jpg",
+    badge: "New",
+  },
+  {
+    category: "Accessories",
+    name: "Meditation Cushion Set",
+    description:
+      "Premium meditation cushion with matching bolster for comfortable mindfulness practice.",
+    price: "$89.99",
+    originalPrice: null,
+    rating: 4.6,
+    reviews: 45,
+    image: "elegant-meditation-cushion-set-neutral-colors.jpg",
+    badge: null,
+  },
+  {
+    category: "Journals",
+    name: "Self-Care Planner",
+    description:
+      "Monthly planner designed to help you prioritize self-care and track your wellness goals.",
+    price: "$32.99",
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 156,
+    image: "elegant-self-care-planner-with-gold-accents.jpg",
+    badge: "Popular",
+  },
+  {
+    category: "Wellness",
+    name: "Stress Relief Tea Blend",
+    description:
+      "Organic herbal tea blend with chamomile, lavender, and lemon balm for relaxation.",
+    price: "$14.99",
+    originalPrice: null,
+    rating: 4.5,
+    reviews: 78,
+    image: "elegant-tea-packaging-stress-relief-blend.jpg",
+    badge: null,
+  },
+  {
+    category: "Worksheets",
+    name: "CBT Thought Record Sheets",
+    description:
+      "Professional-grade thought record worksheets for cognitive behavioral therapy practice.",
+    price: "$12.99",
+    originalPrice: null,
+    rating: 4.9,
+    reviews: 234,
+    image: "professional-cbt-worksheets-therapy-tools.jpg",
+    badge: "Therapist Approved",
+  },
+  {
+    category: "Books",
+    name: "Mindful Breathing Guide",
+    description:
+      "Comprehensive guide with breathing techniques and audio recordings for stress relief.",
+    price: "$22.99",
+    originalPrice: "$27.99",
+    rating: 4.7,
+    reviews: 112,
+    image: "elegant-breathing-guide-book-with-audio.jpg",
+    badge: null,
+  },
+];

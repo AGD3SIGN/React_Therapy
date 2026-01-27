@@ -2,7 +2,10 @@ import { motion } from "framer-motion";
 import { X, ArrowLeft, Calendar, User, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useScrollLock } from "@/hooks/use-scroll-lock";
+
 export default function ResourceView({ resource, onClose }) {
+    useScrollLock(!!resource);
     if (!resource) return null;
 
     return (
@@ -62,25 +65,21 @@ export default function ResourceView({ resource, onClose }) {
                         {resource.excerpt}
                     </div>
 
-                    {/* Mock Content */}
+                    {/* Content */}
                     <div className="space-y-6 text-foreground/80 leading-loose">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                        <h2 className="font-heading text-2xl font-bold text-foreground mt-8 mb-4">Understanding the Core Concepts</h2>
-                        <p>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-                        </p>
-                        <ul className="list-disc pl-6 space-y-2 my-6">
-                            <li>Recognize the signs of stress early</li>
-                            <li>Practice daily mindfulness exercises</li>
-                            <li>Establish clear boundaries with others</li>
-                            <li>Prioritize sleep and nutrition</li>
-                        </ul>
-                        <p>
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
-                        </p>
+                        {resource.content ? (
+                            <div dangerouslySetInnerHTML={{ __html: resource.content }} />
+                        ) : (
+                            <>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                                <h2 className="font-heading text-2xl font-bold text-foreground mt-8 mb-4">Understanding the Core Concepts</h2>
+                                <p>
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                </p>
+                            </>
+                        )}
                     </div>
                 </article>
             </div>

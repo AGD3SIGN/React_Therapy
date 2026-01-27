@@ -2,7 +2,10 @@ import { motion } from "framer-motion";
 import { X, ArrowLeft, ShoppingCart, Star, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useScrollLock } from "@/hooks/use-scroll-lock";
+
 export default function ProductView({ product, onClose }) {
+    useScrollLock(!!product);
     if (!product) return null;
 
     return (

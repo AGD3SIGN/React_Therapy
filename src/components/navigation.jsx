@@ -85,6 +85,7 @@ export default function Navigation() {
                         <Button
                             size="sm"
                             className="bg-accent text-accent-foreground hover:bg-accent/90"
+                            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                         >
                             Book Now
                         </Button>
@@ -148,9 +149,25 @@ export default function Navigation() {
 
                         {/* Footer */}
                         <motion.div variants={item} className="p-6 mt-auto border-t border-border">
+                            {/* Crisis Support - Mobile */}
+                            <div className="rounded-xl bg-orange-50 border border-orange-100 p-4 mb-6 text-center">
+                                <p className="text-xs font-bold text-orange-800 uppercase tracking-wider mb-1">
+                                    In Crisis?
+                                </p>
+                                <p className="text-orange-900 font-bold text-lg">
+                                    Call 988
+                                </p>
+                                <p className="text-xs text-orange-800/80">
+                                    24/7 Confidential Support
+                                </p>
+                            </div>
+
                             <Button
                                 className="w-full bg-accent text-accent-foreground hover:bg-accent/90 h-12 text-lg font-medium mb-6"
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                                }}
                             >
                                 Book a Session
                             </Button>
