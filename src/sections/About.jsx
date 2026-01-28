@@ -44,7 +44,7 @@ export default function About({ onShowDetails }) {
                         <div className="mt-8">
                             <Button
                                 variant="outline"
-                                className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+                                className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-10 rounded-md px-8 bg-accent text-accent-foreground hover:bg-accent/90 min-h-[48px] touch-manipulation"
                                 onClick={onShowDetails}
                             >
                                 More about the doc
