@@ -5,7 +5,7 @@ import { resourcesData } from "@/data/resources";
 
 export default function Resources({ onSelectResource, onShowAll }) {
     return (
-        <section id="blog" className="py-16 sm:py-20 bg-background">
+        <section id="resources" className="py-16 sm:py-20 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12 sm:mb-16">
                     <h2 className="font-heading text-foreground mb-3 sm:mb-4 px-4 sm:px-0">
